@@ -1,5 +1,4 @@
 Controls : <br />
 -Arrow keys for movement. <br />
--When hovering over a point with the cursor and pressing 'Q' the ball position will be set to this point. <br />
--To draw a line move the cursor to the beginning position and left click then move to the end position and left click again.
-
+-Hold 'Q' to set ball position to the cursor. <br />
+-To draw a line click while hovering over a point and click again on another point to draw a line between them.
