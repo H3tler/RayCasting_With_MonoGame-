@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace Monogame1
 {
@@ -51,7 +52,7 @@ namespace Monogame1
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-                      
+                                
             ballPos = new Vector2(_graphics.PreferredBackBufferWidth / 2, 
                 _graphics.PreferredBackBufferHeight / 2);
 
@@ -82,10 +83,10 @@ namespace Monogame1
 
             Vector2 Mid = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
 
-            for (float i = 0f; i < 360f; i += 6f)
+            for (float i = 0f; i < 360f; i += 3f)
             {
                 float rad1 = Geometry.AngleToRadian(i);
-                float rad2 = Geometry.AngleToRadian(i + 6f);
+                float rad2 = Geometry.AngleToRadian(i + 3f);
 
                 float x1 = (float)Math.Cos(rad1) * 100;
                 float y1 = (float)Math.Sin(rad1) * 100;
@@ -123,7 +124,7 @@ namespace Monogame1
                 Exit();
 
             // TODO: Add your update logic here
-
+          
             GetInputs(gameTime);
 
             RayCasting();
@@ -233,20 +234,9 @@ namespace Monogame1
             {
                 if (btnp) btnp = false;
             }
-
+           
         }
                  
-        public void HitRect()
-        {
-            if (ballPos.Y + ballRadiusH >= rectPos.Y - (rect.Height / 2) && ballPos.Y - ballRadiusH <= rectPos.Y + (rect.Height / 2))
-            {
-                if (ballPos.X + ballRadiusW >= rectPos.X - (rect.Width / 2))
-                {
-                    ballPos.X = (rectPos.X - (rect.Width / 2)) - ballRadiusW;
-                }
-            }
-        }
-
         public void RayCasting()
         {
             points = new();
@@ -254,7 +244,7 @@ namespace Monogame1
 
             for (float i = 0f; i <= (Math.PI * 2); i += 0.05f)
             {
-                Vector2 point = Geometry.GetComps(i, 12);
+                Vector2 point = Geometry.VectorRotation(i, 12);
 
                 float x = (point.X + ballPos.X);
                 float y = (point.Y + ballPos.Y);
@@ -294,7 +284,7 @@ namespace Monogame1
                 {
                     points.Add(p);
                     points2.Add(victor);
-                    CollisionBoundry(p, victor);
+                    CollisionBoundry(p, victor);                  
                 }
                               
             }
@@ -309,7 +299,7 @@ namespace Monogame1
             if (distance <= 1f)
             {                  
                 float rad = Geometry.GetRotation(point2, point1);
-                Vector2 vec = Geometry.GetComps(rad, ballRadiusW * 1.2f);
+                Vector2 vec = Geometry.VectorRotation(rad, ballRadiusW * 1.2f);
                 float x = point2.X - vec.X;
                 float y = point2.Y - vec.Y;
 

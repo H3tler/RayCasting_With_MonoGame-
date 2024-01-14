@@ -24,7 +24,7 @@ namespace Monogame1
             for (int i = 0; i <= 360; i++)
             {
                 float rad = Geometry.AngleToRadian(i);
-                var point = Geometry.GetComps(rad, radius);
+                var point = Geometry.VectorRotation(rad, radius);
                 DrawLine(Texture, Mid, new Vector2(point.X + Mid.X, point.Y + Mid.Y), color, 1f);
             }
         }
